@@ -9,19 +9,17 @@ package main
 
 import xhr "github.com/dogia/xmlhttprequest"
 
-func main(){
+	func main(){
 
-  xhr := &xhr.XMLHttpRequest{}
-  
-  xhr.Open(method, URL #string, async #bool, user, password #string)
-  
-  xhr.EventListener("onload", func() {
-		fmt.Println("READY")
-	})
-  
-  xhr.Send(bodyData #string)
-  
-}
+		xhr := xhr.New()
+
+		xhr.EventListener("readystatechange", func() {
+			fmt.Println("Ready state: " + strconv.Itoa(int(xhr.ReadyState())))
+		})
+		xhr.Open("POST", "http://localhost", false, "", "")
+		xhr.Send("data=abcde")
+
+		fmt.Println(xhr.ResponseText)
 
 Functions
 
